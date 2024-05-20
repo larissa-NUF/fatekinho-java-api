@@ -13,6 +13,6 @@ Após isso abra o intelliJ e use o comando
 ``` bash
   nvm clean install
 ```
-E depois basta eecutar o programa 
+E depois basta executar o programa 
 
 E depois acesse no seu navegador o endereço: http://localhost:8080/swagger-ui/index.html
