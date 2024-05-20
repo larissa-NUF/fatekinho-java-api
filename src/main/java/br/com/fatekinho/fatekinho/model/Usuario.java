@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Optional;
+import java.util.OptionalInt;
+
 @Entity
 @Table(name = "Usuarios")
 public class Usuario
@@ -18,6 +21,9 @@ public class Usuario
 
     @Getter @Setter
     private boolean tipo;
+
+    @Getter @Setter
+    private String senha;
 
     @Getter @Setter
     private int idCliente;
