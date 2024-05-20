@@ -1,6 +1,6 @@
 # Fatekinho
 ## Sobre
-Este é um projeto interdiciplinar com o tema plataforma de jogos
+Este é o projeto interdiciplinar com o tema plataforma de jogos
 
 ## Instalando
 Para instalá-lo em sua máquina digite os comandos a seguir:
@@ -9,7 +9,7 @@ Para instalá-lo em sua máquina digite os comandos a seguir:
   git clone https://github.com/larissa-NUF/fatekinho-api
   cd fatekinho-api
 ```
-No intelliJ use o comando
+Após isso abra o intelliJ e use o comando
 ``` bash
   nvm clean install
 ```
