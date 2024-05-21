@@ -4,6 +4,7 @@ import br.com.fatekinho.fatekinho.model.Usuario;
 import br.com.fatekinho.fatekinho.repository.UsuarioRepository;
 import br.com.fatekinho.fatekinho.service.HttpService;
 import br.com.fatekinho.fatekinho.service.interfaces.IHttpService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,9 @@ public class LoteriaController {
         this.httpService = httpService;
     }
 
+    //Em andamento
     @GetMapping(value = "/ultimos-3-meses", produces = "application/json")
+    @Operation(summary = "Retorna resultado da Loto Facil")
     public JSONArray Get() {
         return this.httpService.ObterResultadoLotoFacil();
     }
