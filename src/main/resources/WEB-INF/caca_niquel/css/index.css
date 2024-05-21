@@ -575,6 +575,22 @@ textarea:focus, input:focus{
     .linha5_part1{
         top: 32%;
     }
+
+    .vlinha1{
+        top: 10%;
+    }
+    .vlinha2{
+        top: 10%;
+    }
+    .vlinha3{
+        top: 10%;
+    }
+    .vlinha4{
+        top: 10%;
+    }
+    .vlinha5{
+        top: 10%;
+    }
     
     .linha5_part2{
         top: 31.5%;
