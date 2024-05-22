@@ -6,23 +6,19 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "Usuarios")
-public class Usuario
-{
-    @Getter @Setter
+@Table(name = "fatecoins")
+public class Fatecoins {
+	@Getter @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idUsuario;
+    private long idCoins;
 
     @Getter @Setter
-    private String email;
-
-    @Getter @Setter
-    private boolean tipo;
-
-    @Getter @Setter
-    private String senha;
+    private int qtd;
 
     @Getter @Setter
     private int idCliente;
+
+    @Getter @Setter
+    private int idUsuario;
 }

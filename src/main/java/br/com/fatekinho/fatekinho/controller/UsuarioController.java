@@ -72,7 +72,7 @@ public class UsuarioController {
         
         if (optionalUser.isPresent() && optionalUser.get().getSenha().equals(user.getSenha())) {
             Usuario loggedInUser = optionalUser.get();
-            return new LoginResponse(true, loggedInUser.getIdUsuario(), "Login bem-sucedido!"); // Supondo que getIdUsuario() retorne o ID do usuário
+            return new LoginResponse(true, loggedInUser.getIdCliente(), "Login bem-sucedido!"); // Supondo que getIdUsuario() retorne o ID do usuário
         }
         
         return new LoginResponse(false, 0, "Nome de usuário ou senha incorretos.");

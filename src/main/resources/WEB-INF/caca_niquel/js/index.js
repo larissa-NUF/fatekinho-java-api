@@ -50,6 +50,7 @@ $(document).ready(function(){
 
     });
     $('#bet_1').click(function(){
+        $("#bet_saldo").text(getCoins(usuario));
         inserir_moedas_sound();
         $('#bet_valor').text(1);
         $('.ativo').removeClass("ativo"); // Remove a classe 'ativo' de todos os elementos
@@ -57,6 +58,7 @@ $(document).ready(function(){
     });
     
     $('#bet_10').click(function(){
+        $("#bet_saldo").text(getCoins(usuario));
         inserir_moedas_sound();
         $('#bet_valor').text(10);
         $('.ativo').removeClass("ativo");
@@ -64,6 +66,7 @@ $(document).ready(function(){
     });
     
     $('#bet_100').click(function(){
+        $("#bet_saldo").text(getCoins(usuario));
         inserir_moedas_sound();
         $('#bet_valor').text(100);
         $('.ativo').removeClass("ativo");
@@ -71,6 +74,7 @@ $(document).ready(function(){
     });
     
     $('#bet_all').click(function(){
+        $("#bet_saldo").text(getCoins(usuario));
         inserir_moedas_sound();
         $('#bet_valor').text(parseFloat($('#bet_saldo').text()));
         $('.ativo').removeClass("ativo");
@@ -389,37 +393,63 @@ function background_music(){
 
 function getIDinfo(){
     const usuario = localStorage.getItem("iduser");
-    console.log("usuario:"+usuario)
-    getCoins(usuario);
+    console.log("usuario: "+usuario)
+    $("#bet_saldo").text(getCoins(usuario));
     
 }
 
-async function getCoins(user) {
-    const url = "http://localhost:8080/fatecoins";
+function getCoins(user) {
+    const url = `http://localhost:8080/fatecoins/get/cliente/${user}`;
 
-    try {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                "Access-Control-Allow-Origin": "*", // Isso normalmente não é necessário no lado do cliente
-                'Content-Type': 'application/json'
-            }
-        });
-
-        // Verifica se a resposta está ok (código de status 2xx)
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => {
         if (!response.ok) {
             throw new Error('Erro na requisição: ' + response.statusText);
         }
-
-        // Extrai os dados do corpo da resposta como JSON
-        const data = await response.json();
-
+        return response.json();
+    })
+    .then(data => {
         // Manipula os dados recebidos da API
         console.log('Dados da API:', data);
-        $("#bet_saldo").val(data.getCoins)
-    } catch (error) {
+        // Faça algo com os dados, como atualizar o saldo na interface do usuário
+        return data.qtd
+    })
+    .catch(error => {
         // Trata erros ocorridos durante o request
         console.error('Erro:', error);
-        $('#bet_saldo').text(10)
-    }
+        // Aqui você pode lidar com o erro de acordo com sua lógica de aplicativo
+    });
 }
+
+function updateCoins(novoSaldo) {
+    const id = localStorage.getItem("iduser");
+    const url = `http://localhost:8080/fatecoins/update/${id}`;
+
+    fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ qtd: novoSaldo }) // Aqui você pode ajustar o corpo da requisição conforme necessário
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na requisição: ' + response.statusText);
+        }
+        console.log('Saldo atualizado com sucesso!');
+        // Aqui você pode lidar com a resposta conforme necessário
+    })
+    .catch(error => {
+        // Trata erros ocorridos durante o request
+        console.error('Erro:', error);
+        // Aqui você pode lidar com o erro de acordo com sua lógica de aplicativo
+    });
+}
+
+// Chame a função passando o ID do cliente desejado e o novo saldo
+updateCoins(idDoCliente, novoSaldo);
