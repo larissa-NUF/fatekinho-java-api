@@ -40,7 +40,7 @@ public class FatecoinsController {
 	@PutMapping(value = "/update/{id}")
 	@Operation(summary = "Atualiza o saldo")
 	public void updateSaldo(@PathVariable Long id,@RequestBody Fatecoins saldo) {
-		Fatecoins saldo1 = _FatecoinsRepository.findById(id).get();
+		Fatecoins saldo1 = _FatecoinsRepository.findByIdCliente(id).get();
 		saldo1.setQtd(saldo.getQtd());
 		_FatecoinsRepository.save(saldo1);
 	}

@@ -139,21 +139,39 @@ textarea:focus, input:focus{
     border-radius: 6px;
     padding: 8px 0;
     z-index: 1000;
-    transform: translate(-50%,-50%);
-    
+    transform: translate(-50%,-50%)scale(1);
     animation: scale 2s infinite;
     
     
   }
+  
+ .blink {
+    animation: blink 3s infinite;
+}
 
-  @keyframes scale {
+@keyframes scale {
     5% {
-        transform: scale(1.1);
+        transform: translate(-50%, -50%) scale(1);
     
     }
     50% {
-        transform: scale(1.1);
+        transform: translate(-50%, -50%) scale(1.1);
         
+    }
+}
+
+@keyframes blink {
+    0% {
+    	transform: scale(1);
+        filter: drop-shadow(0px 0px 0px #f0ff24); /* Sombra fraca */
+    }
+    50% {
+    	transform: scale(1.1);
+        filter: drop-shadow(0px 0px 10px #f0ff24); /* Sombra forte */
+    }
+    100% {
+    	transform: scale(1);
+        filter: drop-shadow(0px 0px 0px #f0ff24); /* Sombra fraca */
     }
 }
 
@@ -376,7 +394,7 @@ textarea:focus, input:focus{
     position: relative;
     height: 5px;
     width: 41%;
-    background: red;
+    background: blue;
     top: 44.7%;
     left: 14.3%;
     z-index: 100;
@@ -387,7 +405,7 @@ textarea:focus, input:focus{
     position: relative;
     height: 5px;
     width: 41%;
-    background: red;
+    background: blue;
     top: 44%;
     left: 45.3%;
     z-index: 100;
@@ -399,7 +417,7 @@ textarea:focus, input:focus{
     position: relative;
     height: 5px;
     width: 48%;
-    background: red;
+    background: blue;
     top: 42%;
     left: 7%;
     z-index: 100;
@@ -410,7 +428,7 @@ textarea:focus, input:focus{
     position: relative;
     height: 5px;
     width: 48%;
-    background: red;
+    background: blue;
     top: 41.5%;
     left: 45.1%;
     z-index: 100;
@@ -421,7 +439,7 @@ textarea:focus, input:focus{
     position: absolute;
     height: 60%;
     width: 10px;
-    background: red;
+    background: green;
     top: 15%;
     left: 19%;
     z-index: 101;
@@ -431,7 +449,7 @@ textarea:focus, input:focus{
     position: absolute;
     height: 60%;
     width: 10px;
-    background: red;
+    background: green;
     top: 15%;
     left: 34%;
     z-index: 101;
@@ -441,7 +459,7 @@ textarea:focus, input:focus{
     position: absolute;
     height: 60%;
     width: 10px;
-    background: red;
+    background: green;
     top: 15%;
     left: 50%;
     z-index: 101;
@@ -451,7 +469,7 @@ textarea:focus, input:focus{
     position: absolute;
     height: 60%;
     width: 10px;
-    background: red;
+    background: green;
     top: 15%;
     left: 65%;
     z-index: 101;
@@ -461,7 +479,7 @@ textarea:focus, input:focus{
     position: absolute;
     height: 60%;
     width: 10px;
-    background: red;
+    background: green;
     top: 15%;
     left: 81%;
     z-index: 101;
