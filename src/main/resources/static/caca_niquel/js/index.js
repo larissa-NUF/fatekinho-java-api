@@ -649,13 +649,13 @@ function getCoins(user) {
         //console.log('Dados da API:', data);
         //console.log('Moedas', data.qtd);
         $("#bet_saldo").text(data.qtd);
-        // Faça algo com os dados, como atualizar o saldo na interface do usuário
+        // Faça algo com os dados, como atualizar o saldo na ‘interface’ do usuário
         return data.qtd
     })
     .catch(error => {
         // Trata erros ocorridos durante o request
         console.error('Erro:', error);
-        // Aqui você pode lidar com o erro de acordo com sua lógica de aplicativo
+        // Aqui você pode lidar com o erro conforme a sua lógica de aplicativo
     });
 }
 

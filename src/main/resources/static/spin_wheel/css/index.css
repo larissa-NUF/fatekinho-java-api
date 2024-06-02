@@ -1,0 +1,261 @@
+* {
+    box-sizing: border-box; /* Adiciona esta linha para incluir preenchimento e borda na largura e altura */
+}
+:root{
+    --bg-color: #0F1923;
+    --second-bg-color: #090f15;
+    --font-color: #b2b6c0;
+    --second-font-color: #d4d4d4;
+    --border-color: #293139;
+    --impares: #ED1836;
+    --pares: #FAF755;
+    --coringa: #D4D4D4;
+    --white: #FFFFFF;
+    --gray: #818181;
+}
+
+body {
+    font-family: "Titillium Web", sans-serif;
+    background: var(--bg-color);
+    color: var(--font-color);
+    display: flex;
+    justify-content: center; /* Centraliza verticalmente todo o conteúdo */
+    align-items: center;
+    height: 100vh; /* Alterado para 100vh para preencher toda a altura da tela */
+    margin: 0;
+}
+
+button{
+    cursor: pointer;
+}
+
+h1 {
+    padding-left: 10px;
+    font-size: 1em; /* Tamanho da fonte desejado */
+}
+
+
+.menu-lateral{
+    position: relative;
+    height: 100vh;
+    flex-grow: 1;
+    border-right: 2px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.container-user{
+    display: flex;
+    flex-direction: row;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    margin: 5px;
+    justify-content: center;
+}
+#user_name{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#user_saldo{
+    width: 50%;
+    background: var(--second-bg-color);
+    color: var(--font-color);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding-inline: 20px;
+}
+
+.input-container{
+    height: 7%;
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+#bet_valor{
+    flex-grow: 2;
+    background: var(--second-bg-color);
+    color: var(--font-color);
+    border: 2px solid transparent;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    padding-inline: 20px;
+}
+.btn_add{
+    flex-grow: 1;
+    background: var(--bg-color);
+    color: var(--font-color);
+    border: 2px solid var(--border-color);
+}
+
+.btn_container{
+    height: 7%;
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.aposta{
+    font-size: 22px;
+    margin: 2px;
+    flex-grow: 1;
+    border: 2px solid transparent;
+    border-radius: 5px;
+}
+
+.amarelo{
+    background: var(--pares);
+    color: var(--gray);
+}
+.vermelho{
+    background: var(--impares);
+    color: var(--white);
+}
+.coringa{
+    background: var(--coringa);
+}
+
+.container_colunas{
+    display: flex;
+    height: 48vh;
+}
+.column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn_impar{
+    font-size: 18px;
+    margin: 2px;
+    aspect-ratio: 1;
+    background: var(--impares);
+    color: var(--white);
+    font-weight: bold;
+    border: 0;
+    border-radius: 5px;
+}
+.btn_par{
+    font-size: 18px;
+    margin: 2px;
+    aspect-ratio: 1;
+    background: var(--pares);
+    color: var(--gray);
+    font-weight: bold;
+    border: 0;
+    border-radius: 5px;
+}
+
+.tela-jogo{
+    flex-grow: 8;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+
+}
+.screen{
+    background: var(--second-bg-color);
+    flex-grow: 5;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+#resultado{
+    position: relative;
+    top: 25%;
+    font-size: 24px;
+}
+
+.carrosel {
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.carrosel .seta {
+    width: 3px;
+    background: grey;
+    left: 55%;
+    height: 100px;
+    transform: translate(-50%, 0%);
+    position: absolute;
+    z-index: 1;
+}
+
+.carrosel .container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carrosel .container .linha {
+    position: relative;
+    display: flex;
+}
+
+.carrosel .container .linha .cartao {
+    width: 75px;
+    height: 75px;
+    margin: 3px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+}
+
+.cartao.vermelho {
+    background: var(--impares);
+    color: white;
+}
+
+.cartao.coringa {
+    background: var(--coringa);
+    color: black;
+}
+
+.cartao.amarelo {
+    background: var(--pares);
+    color: var(--gray);
+}
+
+.cartao.vermelho.borderVerde{
+    border: 5px solid lawngreen;
+}
+.cartao.amarelo.borderVerde{
+    border: 5px solid lawngreen;
+}
+
+.borderVerde{
+    border: 5px solid white;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0%{
+        border-color: greenyellow;
+    }
+    50%{
+        border-color: lightgreen;
+    }
+    100%{
+        border-color: white;
+    }
+
+}
+
+.menu-inferior{
+    flex-grow: 1;
+    border-top: 2px solid var(--border-color);
+    padding: 10px;
+}
