@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -12,11 +12,11 @@
 <body>
     <div class="menu-lateral">
         <div class="container-user">
-            <p id="user_name">Nome do usuario</p>
-            <input type="number" name="" id="user_saldo" value=100 readonly >
+            <p id="user_name">Moedas</p>
+            <input type="number" name="" id="user_saldo" value=0 readonly >
         </div>
         <div class="input-container">
-            <input type="number" name="int_moedas" id="bet_valor" placeholder="Quantia" readonly>
+            <input type="number" name="int_moedas" id="bet_valor" value=0 readonly>
             <button class="btn_add um">+1</button>
             <button class="btn_add dez">+10</button>
             <button class="btn_add cem">+100</button>
@@ -86,6 +86,11 @@
         </div>
         <div class="menu-inferior">
             <h4>Giros anteriores</h4>
+            <div class="container-anteriores">
+                <div class="carrosel-anteriores">
+
+                </div>
+            </div>
         </div>
     </div>
 </body>

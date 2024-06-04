@@ -1,5 +1,6 @@
 $(document).ready(function (){
     iniciar_roleta();
+    $("#resultado").text("")
     getIDinfo();
     let random_number = 0
 
@@ -17,10 +18,10 @@ $(document).ready(function (){
         $("#bet_valor").val(saldo);
     });
 
-    $(".aposta.amarelo").on("click", function(){
+    $(".aposta.amarelo").on("click", async function(){
         let aposta = $("#bet_valor").val();
         let saldo = $("#user_saldo").val();
-        let check = checkCoins(saldo,aposta)
+        let check = await checkCoins(saldo,aposta)
         if (check === true) {
             random_number = Math.floor(Math.random()*36);
             rodar("amarelo",aposta,random_number)
@@ -28,10 +29,10 @@ $(document).ready(function (){
             return;
         }
     });
-    $(".aposta.vermelho").on("click", function(){
+    $(".aposta.vermelho").on("click", async function(){
         let aposta = $("#bet_valor").val();
         let saldo = $("#user_saldo").val();
-        let check = checkCoins(saldo,aposta)
+        let check = await checkCoins(saldo,aposta)
         if (check === true) {
             random_number = Math.floor(Math.random()*36);
             rodar("vermelho",aposta,random_number)
@@ -39,10 +40,10 @@ $(document).ready(function (){
             return;
         }
     });
-    $(".aposta.coringa").on("click", function(){
+    $(".aposta.coringa").on("click", async function(){
         let aposta = $("#bet_valor").val();
         let saldo = $("#user_saldo").val();
-        let check = checkCoins(saldo,aposta)
+        let check = await checkCoins(saldo,aposta)
         if (check === true) {
             random_number = Math.floor(Math.random()*36);
             rodar("coringa",aposta,random_number)
@@ -50,10 +51,10 @@ $(document).ready(function (){
             return;
         }
     });
-    $(".btn_par,.btn_impar").on("click",function () {
+    $(".btn_par,.btn_impar").on("click",async function () {
         let aposta = $("#bet_valor").val();
         let saldo = $("#user_saldo").val();
-        let check = checkCoins(saldo,aposta)
+        let check = await checkCoins(saldo,aposta)
         let numero = $(this).text();
         if (check === true) {
             random_number = Math.floor(Math.random()*36);
@@ -66,6 +67,7 @@ $(document).ready(function (){
 
 
 });
+
 
 
 function iniciar_roleta() {
@@ -117,27 +119,12 @@ function iniciar_roleta() {
     }
 }
 
-function checkCoins(saldo,aposta) {
-    if (aposta === "0") {
-        alert("Por favor, insira uma quantia antes de girar.");
-        return false;
-    }
-    if (aposta > saldo){
-        alert("Saldo Insuficiente");
-        return false;
-    } else {
-        random_number = Math.floor(Math.random()*36);
-        let saldo_att = saldo-aposta
-        updateCoins(saldo_att)
-        return true;
-    }
-}
+
 
 function rodar(escolha, valor, number){
-    alert("Girando!")
-    $(".cartao").removeClass("borderVerde");
-    let saldo = $("#user_saldo").val();
-    let ganho
+    $(".cartao").removeClass("borderVerde","borderVermelho");
+
+    let ganho = 0
     $("#resultado").text("Girando...")
     let $carrosel = $(".carrosel .container"),
         order = [
@@ -165,6 +152,8 @@ function rodar(escolha, valor, number){
     });
 
     setTimeout(function () {
+        let saldo = parseInt($("#user_saldo").val());
+        console.log("saldo antes de rodar: "+saldo)
         $carrosel.css({
             "transition-timing-function": "",
             "transition-duration": "",
@@ -176,47 +165,89 @@ function rodar(escolha, valor, number){
             $(".cartao:contains('"+posicao+"')").addClass("borderVerde");
             ganho = valor*6
             $("#resultado").text(`Você ganhou ${ganho}!`)
-            updateCoins(saldo+ganho)
+            let novo_saldo = saldo+ganho
+            console.log("ganho ="+ganho+" saldo = "+saldo+" novosaldo = "+novo_saldo)
+            updateCoins(novo_saldo)
 
         } else if (posicao % 2 === 0 && escolha === "amarelo" ){
             $(".cartao:contains('"+posicao+"')").addClass("borderVerde");
             ganho = valor*2
             $("#resultado").text(`Você ganhou ${ganho}!`)
-            updateCoins(saldo+ganho)
+            let novo_saldo = saldo+ganho
+            console.log("ganho ="+ganho+" saldo = "+saldo+" novosaldo = "+novo_saldo)
+            updateCoins(novo_saldo)
         } else if (posicao % 2 !== 0 && escolha === "vermelho" ){
             $(".cartao:contains('"+posicao+"')").addClass("borderVerde");
             ganho = valor*2
             $("#resultado").text(`Você ganhou ${ganho}!`)
-            updateCoins(saldo+ganho)
+            let novo_saldo = saldo+ganho
+            console.log("ganho ="+ganho+" saldo = "+saldo+" novosaldo = "+novo_saldo)
+            updateCoins(novo_saldo)
         } else if (posicao === escolha ){
             $(".cartao:contains('"+posicao+"')").addClass("borderVerde");
             ganho = valor*9
             $("#resultado").text(`Você ganhou ${ganho}!`)
-            updateCoins(saldo+ganho)
+            let novo_saldo = saldo+ganho
+            console.log("ganho ="+ganho+" saldo = "+saldo+" novosaldo = "+novo_saldo)
+            updateCoins(novo_saldo)
         } else {
             $(".cartao:contains('"+posicao+"')").addClass("borderVermelha");
             $("#resultado").text(`Você perdeu ${valor}!`)
         }
-
+        add_history_card(posicao)
         document.getElementById("resultado").textContent =
             "Fatequinho girou " + posicao;
     }, 6 * 1000);
 }
 
+function add_history_card(number){
+    let $container_inferior = $(".carrosel-anteriores"),
+        linha = "";
+
+    linha += "<div class='linha'>";
+    if(number % 2 === 0){
+        linha += `<div class='cartao-inf amarelo'>${number}</div>`;
+        linha += "</div>";
+    } else if(number % 2 !== 0){
+        linha += `<div class='cartao-inf vermelho'>${number}</div>`;
+        linha += "</div>";
+    } else if(number === 0){
+        linha += `<div class='cartao-inf coringa'>${number}</div>`;
+        linha += "</div>";
+    }
+
+    $container_inferior.append(linha);
+}
+
 // Funções para chamar API
+
+async function checkCoins(saldo,aposta) {
+    if (aposta === "0") {
+        alert("Por favor, insira uma quantia antes de girar.");
+        return false;
+    }
+    let random_number;
+    if (aposta > saldo) {
+        alert("Saldo Insuficiente");
+        return false;
+    } else {
+        let saldo_att = saldo - aposta
+        await updateCoins(saldo_att)
+        return true;
+    }
+}
+
 function getIDinfo(){
     const usuario = localStorage.getItem("iduser");
     console.log("usuario: "+usuario);
     getCoins(usuario);
-
-    console.log($("#user_saldo").text());
 
 }
 
 function getCoins(user) {
     const url = `http://localhost:8080/fatecoins/get/cliente/${user}`;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -247,7 +278,7 @@ function updateCoins(novoSaldo) {
     const id = localStorage.getItem("iduser");
     const url = `http://localhost:8080/fatecoins/update/${id}`;
 
-    fetch(url, {
+    return fetch(url, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -258,7 +289,7 @@ function updateCoins(novoSaldo) {
             if (!response.ok) {
                 throw new Error('Erro na requisição: ' + response.statusText);
             }
-            //console.log('Saldo atualizado com sucesso!');
+            console.log('Saldo atualizado com sucesso!');
             // Aqui você pode lidar com a resposta conforme necessário
             getCoins(id)
         })

@@ -20,5 +20,7 @@ public class Fatecoins {
     private int idCliente;
 
     @Getter @Setter
-    private int idUsuario;
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario idUsuario;
 }
