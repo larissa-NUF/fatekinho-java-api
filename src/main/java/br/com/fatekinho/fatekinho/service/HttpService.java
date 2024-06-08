@@ -1,31 +1,53 @@
 package br.com.fatekinho.fatekinho.service;
 
+import br.com.fatekinho.fatekinho.model.response.LoteriaResultadoResponse;
 import br.com.fatekinho.fatekinho.service.interfaces.IHttpService;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 
 public class HttpService implements IHttpService {
     HttpClient client = HttpClient.newHttpClient();
+    private String url = "https://loteriascaixa-api.herokuapp.com/api";
 
-    public JSONArray ObterResultadoLotoFacil(){
+    public List<String> ObterLoteria(){
         try {
-            String url = "https://apiloterias.com.br/app/v2/resultado?loteria=lotofacil&token=kJdfLjd38Jai2ek&concurso=ultimos3";
-            String resultados = Get(url);
-            JSONArray jsonObject = new JSONArray (resultados);
-            return jsonObject;
+            String resultados = Get(url + "/");
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<String> response = objectMapper.readValue(resultados, new TypeReference<List<String>>() {});
+            return response;
         }catch (Exception ex){
             throw new RuntimeException(ex);
         }
+    }
 
+    public List<LoteriaResultadoResponse> ObterResultadoLoteria(String tipoLoteria){
+        try {
+
+            String resultados = Get(url + "/" + tipoLoteria);
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<LoteriaResultadoResponse> response = objectMapper.readValue(resultados, new TypeReference<List<LoteriaResultadoResponse>>() {});
+            return response;
+        }catch (Exception ex){
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public LoteriaResultadoResponse ObterResultadoConcurso(String tipoLoteria,String tipoConcurso){
+        try {
+
+            String resultados = Get(url + "/" + tipoLoteria + "/" + tipoConcurso);
+            ObjectMapper objectMapper = new ObjectMapper();
+            LoteriaResultadoResponse response = objectMapper.readValue(resultados, new TypeReference<LoteriaResultadoResponse>() {});
+            return response;
+        }catch (Exception ex){
+            throw new RuntimeException(ex);
+        }
     }
 
     private String Get (String url){
