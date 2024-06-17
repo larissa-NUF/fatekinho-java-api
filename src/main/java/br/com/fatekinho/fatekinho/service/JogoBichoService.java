@@ -105,6 +105,7 @@ public class JogoBichoService implements IJogoBichoService {
             aposta.setFinalizada(true);
             aposta.setGanho(valorGanho);
             aposta.setIdSorteio(resultadoSalvar.getId());
+
             _apostasJogoBichoRepository.save(aposta);
 
             Fatecoins saldo1 = _FatecoinsRepository.findByIdCliente(aposta.getIdCliente()).get();

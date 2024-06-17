@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.Date;
 
@@ -55,7 +57,7 @@ public class ApostasJogoBicho {
 
     @Getter @Setter
     @JsonProperty("dataCadastroSorteio")
-    @Column(nullable=true,insertable = false, updatable = false)
+    @Column(nullable=true, insertable = false, updatable = false)
     private Date DataCadastroSorteio;
 }
 
