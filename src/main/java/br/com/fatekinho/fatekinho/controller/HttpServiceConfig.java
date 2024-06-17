@@ -1,6 +1,7 @@
 package br.com.fatekinho.fatekinho.controller;
 
 import br.com.fatekinho.fatekinho.service.HttpService;
+import br.com.fatekinho.fatekinho.service.JogoBichoService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,10 @@ public class HttpServiceConfig {
     @Bean
     HttpService httpService() {
         return new HttpService();
+    }
+    @Bean
+    JogoBichoService jogoBichoService() {
+        return new JogoBichoService();
     }
 
 }
