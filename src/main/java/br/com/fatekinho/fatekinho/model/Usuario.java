@@ -25,4 +25,24 @@ public class Usuario
 
     @Getter @Setter
     private int idCliente;
+
+    @Getter @Setter
+    @Transient
+    private String nome;
+
+    @Getter @Setter
+    @Transient
+    private String cpf;
+
+    @Getter @Setter
+    @Transient
+    private String data_nasc;
+
+    @Getter @Setter
+    @Transient
+    private String cep;
+
+    @Getter @Setter
+    @Transient
+    private String numero;
 }
