@@ -36,7 +36,8 @@ public class FatecoinsController {
 	public Fatecoins findbyIDCliente(@PathVariable Long idCliente) {
 		return _FatecoinsRepository.findByIdCliente(idCliente).get();
 	}
-	
+
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PutMapping(value = "/update/{id}")
 	@Operation(summary = "Atualiza o saldo")
 	public void updateSaldo(@PathVariable Long id,@RequestBody Fatecoins saldo) {
