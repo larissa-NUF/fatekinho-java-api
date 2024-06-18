@@ -93,6 +93,11 @@ public class UsuarioController {
         
         if (optionalUser.isPresent() && optionalUser.get().getSenha().equals(user.getSenha())) {
             Usuario loggedInUser = optionalUser.get();
+            Cliente cliente = _clienteRepository.getById((long) loggedInUser.getIdCliente());
+            loggedInUser.setCpf(cliente.getCpf());
+            loggedInUser.setNome(cliente.getNome());
+            loggedInUser.setData_nasc(cliente.getData_nasc());
+            loggedInUser.setCep(cliente.getCep());
             return new LoginResponse(true, loggedInUser, "Login bem-sucedido!"); // Supondo que getIdUsuario() retorne o ID do usuário
         }
         
