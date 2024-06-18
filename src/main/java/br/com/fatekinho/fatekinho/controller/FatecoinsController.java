@@ -22,7 +22,7 @@ public class FatecoinsController {
 	@Autowired
 	private FatecoinsRepository _FatecoinsRepository;
 	
-	@CrossOrigin
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping(value = "/get/{id}")
 	@Operation(summary = "Obtem o saldo de coins por id")
 	public Fatecoins findByID(@PathVariable Long id) {
@@ -30,13 +30,14 @@ public class FatecoinsController {
 		
 	}
 	
-	@CrossOrigin
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping(value = "/get/cliente/{idCliente}")
 	@Operation(summary = "Obtem o saldo de coins por idCliente")
 	public Fatecoins findbyIDCliente(@PathVariable Long idCliente) {
 		return _FatecoinsRepository.findByIdCliente(idCliente).get();
 	}
 	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PutMapping(value = "/update/{id}")
 	@Operation(summary = "Atualiza o saldo")
 	public void updateSaldo(@PathVariable Long id,@RequestBody Fatecoins saldo) {

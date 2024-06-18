@@ -1,3 +1,5 @@
+
+
 $(document).ready(function (){
     iniciar_roleta();
     $("#resultado").text("")
