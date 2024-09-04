@@ -3,9 +3,7 @@ package br.com.fatekinho.fatekinho.controller;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.fatekinho.fatekinho.model.Cliente;
-import br.com.fatekinho.fatekinho.model.Fatecoins;
-import br.com.fatekinho.fatekinho.model.UsuarioDTO;
+import br.com.fatekinho.fatekinho.model.*;
 import br.com.fatekinho.fatekinho.model.response.LoginResponse;
 import br.com.fatekinho.fatekinho.repository.ClienteRepository;
 import br.com.fatekinho.fatekinho.repository.FatecoinsRepository;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fatekinho.fatekinho.model.Usuario;
 import br.com.fatekinho.fatekinho.repository.UsuarioRepository;
 
 @RestController
@@ -88,7 +85,7 @@ public class UsuarioController {
     @CrossOrigin
     @PostMapping(value = "/login")
     @Operation(summary = "Realiza login")
-    public LoginResponse login(@RequestBody Usuario user) {
+    public LoginResponse login(@RequestBody UsuarioLogin user) {
         Optional<Usuario> optionalUser = _usuarioRepository.findByEmail(user.getEmail());
         
         if (optionalUser.isPresent() && optionalUser.get().getSenha().equals(user.getSenha())) {
